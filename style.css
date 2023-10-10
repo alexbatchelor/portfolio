@@ -107,6 +107,10 @@ header a:hover {
   transform: rotate(-3deg);
   color: #6295D9;
 }
+.about.current {
+  color: #6295D9;
+    transform: rotate(-3deg);
+}
 
 /* row and column system using 'flexbox' */
 .row {
