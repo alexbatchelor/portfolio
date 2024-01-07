@@ -25,9 +25,16 @@ body > footer {
 }
 
 .gfx {
+  position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
   object-fit: cover;
+}
+
+.gfx-overlay {
+  position: absolute;
+  top: 0px;
+  left: 0px;
 }
 
 .video-container {
