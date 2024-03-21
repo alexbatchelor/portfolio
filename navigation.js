@@ -1,28 +1,15 @@
+// Check if the script is running on GitHub Pages
+const isGitHubPages = window.location.hostname === 'alexbatchelor.github.io';
+
 // Load the projects.json file
-fetch('/portfolio/projects.json')
+fetch(isGitHubPages ? '/portfolio/projects.json' : 'projects.json')
   .then(response => response.json())
   .then(projects => {
     // Get the current project path
     const currentPath = window.location.pathname;
 
-    // Log the current page URL
-    console.log("Current path:", currentPath);
-
-    // Log URLs from the JSON data for debugging
-    console.log("URLs from JSON data:");
-    projects.forEach(project => console.log(project.url));
-
-    // Normalize function to remove leading and trailing slashes
-    const normalizeUrl = url => url.replace(/^\/+|\/+$/g, '');
-
     // Find the index of the current project
-    const currentProjectIndex = projects.findIndex(project => normalizeUrl(project.url) === normalizeUrl(currentPath));
-
-    // Log the normalized current page URL for debugging
-    console.log("Normalized current path:", normalizeUrl(currentPath));
-
-    // Log the index of the current project
-    console.log("Current project index:", currentProjectIndex);
+    const currentProjectIndex = projects.findIndex(project => project.url === currentPath);
 
     // If the current project is found
     if (currentProjectIndex !== -1) {
@@ -32,13 +19,18 @@ fetch('/portfolio/projects.json')
 
       // Update the previous and next project links
       if (previousProject) {
-        document.getElementById('previous-link').href = previousProject.url;
+        document.getElementById('previous-link').href = isGitHubPages ? previousProject.absolute_url : previousProject.url;
       }
       if (nextProject) {
-        document.getElementById('next-link').href = nextProject.url;
+        document.getElementById('next-link').href = isGitHubPages ? nextProject.absolute_url : nextProject.url;
       }
     } else {
       console.log("Current project not found in JSON file.");
     }
   })
   .catch(error => console.error("Error fetching projects.json:", error));
+// Get the current year
+const currentYear = new Date().getFullYear();
+
+// Update the content of the current-year element
+document.getElementById('current-year').textContent = currentYear;
