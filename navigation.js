@@ -1,5 +1,5 @@
 // Load the projects.json file
-fetch('projects.json')
+fetch('/portfolio/projects.json') // Change the path to include '/portfolio/'
   .then(response => response.json())
   .then(projects => {
     // Get the current project path
@@ -17,11 +17,11 @@ fetch('projects.json')
 
     // Update the previous and next project links
     if (previousProject) {
-      const previousLink = previousProject.url.startsWith('/') ? previousProject.url : '/' + previousProject.url;
+      const previousLink = '/portfolio/' + (previousProject.url.startsWith('/') ? previousProject.url : '/' + previousProject.url);
       document.getElementById('previous-link').href = previousLink;
     }
     if (nextProject) {
-      const nextLink = nextProject.url.startsWith('/') ? nextProject.url : '/' + nextProject.url;
+      const nextLink = '/portfolio/' + (nextProject.url.startsWith('/') ? nextProject.url : '/' + nextProject.url);
       document.getElementById('next-link').href = nextLink;
     }
   });
