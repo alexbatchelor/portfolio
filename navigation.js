@@ -1,15 +1,18 @@
 // Load the projects.json file
-fetch('projects.json')
+fetch('/portfolio/projects.json')
   .then(response => response.json())
   .then(projects => {
     // Get the current project path
-    const currentPath = window.location.pathname.replace(/\/$/, ''); // Remove trailing slash
+    const currentPath = window.location.pathname;
 
-    // Normalize function to remove leading and trailing slashes
-    const normalizeUrl = url => url.replace(/^\/+|\/+$/g, '');
+    // Find the index of the current project
+    let currentProjectIndex = projects.findIndex(project => project.url === currentPath);
 
-    // Find the current project in the array
-    const currentProjectIndex = projects.findIndex(project => normalizeUrl(project.url) === normalizeUrl(currentPath));
+    // If the current project is not found, try finding it without trailing slash
+    if (currentProjectIndex === -1) {
+      const currentPathWithoutTrailingSlash = currentPath.endsWith('/') ? currentPath.slice(0, -1) : currentPath;
+      currentProjectIndex = projects.findIndex(project => project.url === currentPathWithoutTrailingSlash);
+    }
 
     // Set up the previous and next project links
     const previousProject = projects[currentProjectIndex - 1];
