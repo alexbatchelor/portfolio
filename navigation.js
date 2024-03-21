@@ -5,11 +5,23 @@ fetch('/portfolio/projects.json')
     // Get the current project path
     const currentPath = window.location.pathname;
 
-    // Find the index of the current project
-    const currentProjectIndex = projects.findIndex(project => project.url === currentPath);
-
-    // Log to console for debugging
+    // Log the current page URL
     console.log("Current path:", currentPath);
+
+    // Log URLs from the JSON data for debugging
+    console.log("URLs from JSON data:");
+    projects.forEach(project => console.log(project.url));
+
+    // Normalize function to remove leading and trailing slashes
+    const normalizeUrl = url => url.replace(/^\/+|\/+$/g, '');
+
+    // Find the index of the current project
+    const currentProjectIndex = projects.findIndex(project => normalizeUrl(project.url) === normalizeUrl(currentPath));
+
+    // Log the normalized current page URL for debugging
+    console.log("Normalized current path:", normalizeUrl(currentPath));
+
+    // Log the index of the current project
     console.log("Current project index:", currentProjectIndex);
 
     // If the current project is found
