@@ -17,9 +17,11 @@ fetch('projects.json')
 
     // Update the previous and next project links
     if (previousProject) {
-      document.getElementById('previous-link').href = previousProject.url;
+      const previousLink = previousProject.url.startsWith('/') ? previousProject.url : '/' + previousProject.url;
+      document.getElementById('previous-link').href = previousLink;
     }
     if (nextProject) {
-      document.getElementById('next-link').href = nextProject.url;
+      const nextLink = nextProject.url.startsWith('/') ? nextProject.url : '/' + nextProject.url;
+      document.getElementById('next-link').href = nextLink;
     }
   });
