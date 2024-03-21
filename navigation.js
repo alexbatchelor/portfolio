@@ -17,11 +17,11 @@ fetch('./projects.json') // Change the path to include '/portfolio/'
 
     // Update the previous and next project links
     if (previousProject) {
-      const previousLink = '/portfolio' + (previousProject.url.startsWith('/') ? previousProject.url : '/' + previousProject.url);
+      const previousLink = './' + (previousProject.url.startsWith('/') ? previousProject.url : '/' + previousProject.url);
       document.getElementById('previous-link').href = previousLink;
     }
     if (nextProject) {
-      const nextLink = '/portfolio' + (nextProject.url.startsWith('/') ? nextProject.url : '/' + nextProject.url);
+      const nextLink = './' + (nextProject.url.startsWith('/') ? nextProject.url : '/' + nextProject.url);
       document.getElementById('next-link').href = nextLink;
     }
   });
